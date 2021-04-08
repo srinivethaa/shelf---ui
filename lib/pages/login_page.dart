@@ -138,25 +138,13 @@ class _LoginPageState extends State<LoginPage> {
                                 isApiCallProcess = true;
                               });
 
-                              APIService apiService = new APIService();
-                              apiService.login(loginRequestModel).then((value) {
-                                if (value != null) {
-                                  setState(() {
-                                    isApiCallProcess = false;
-                                  });
-
-                                  if (value.token.isNotEmpty) {
-                                    final snackBar = SnackBar(
-                                        content: Text("Login Successful"));
-                                    scaffoldKey.currentState
-                                        .showSnackBar(snackBar);
-                                  } else {
-                                    final snackBar =
-                                        SnackBar(content: Text(value.error));
-                                    scaffoldKey.currentState
-                                        .showSnackBar(snackBar);
-                                  }
-                                }
+                              APIService apiService = APIService();
+                              apiService
+                                  .login(loginRequestModel, context)
+                                  .then((value) {
+                                setState(() {
+                                  isApiCallProcess = false;
+                                });
                               });
                             }
                           },
